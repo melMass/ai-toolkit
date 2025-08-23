@@ -5,7 +5,12 @@
   "scripts": {
     "dev": "concurrently -k -n WORKER,UI \"ts-node-dev --respawn --watch cron --transpile-only cron/worker.ts\" \"next dev --turbopack\"",
     "build": "tsc -p tsconfig.worker.json && next build",
-    "start": "concurrently --restart-tries -1 --restart-after 1000 -n WORKER,UI \"node dist/worker.js\" \"next start --port 8675\"",
+    "start": "./manager.sh start",
+	"stop": "./manager.sh stop",
+	"status": "./manager.sh status",
+    "restart": "./manager.sh restart",
+    "logs:ui": "./manager.sh logs ui",
+    "logs:worker": "./manager.sh logs worker",
     "build_and_start": "bun install && bun run update_db && bun run build && bun run start",
     "lint": "next lint",
     "update_db": "bunx prisma generate && bunx prisma db push",
